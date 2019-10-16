@@ -1,0 +1,15 @@
+@import '~common/stylus/variable'
+.suggestion-item
+  list-style: none
+  height: 32px
+  line-height: 32px
+  overflow-x: hidden
+  text-overflow: ellipsis
+  white-space: nowrap
+  padding: 0 5px
+  &:hover, &.current-suggestion
+    background: $color-theme
+    cursor: pointer
+  & + .suggestion-item
+    border-top: 1px solid $color-theme-l
+  
