@@ -11,6 +11,7 @@ import Suggestions from './plugins/mentions/components/SuggestionList'
 // import { getInput } from './plugins/mentions/utils'
 // import { USER_MENTION_NODE_TYPE, IMention } from './plugins/mentions'
 import { IMention } from './plugins/mentions'
+
 export interface IMyEditorProps extends EditorState {
   // onChange: OnChangeFn; 
   setValue: (value: Value) => any
