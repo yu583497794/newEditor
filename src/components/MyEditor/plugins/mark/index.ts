@@ -1,4 +1,4 @@
-import onKeyDown from './handles/onKeyDown.js'
+import onKeyDown from './handlers/onKeyDown.js'
 import renderMark from './renders/renderMark'
 
 export default {
