@@ -502,6 +502,7 @@ module.exports = function(webpackEnv) {
               loaders: [
                 require.resolve('style-loader'), 
                 require.resolve('css-loader'),
+                require.resolve('postcss-loader'),
                 require.resolve('stylus-loader')
               ]
             },

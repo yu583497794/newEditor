@@ -1,5 +1,5 @@
 // eslint-disable-next-line
-import React, { ReactElement } from 'react'
+import React from 'react'
 import './iconButton.styl'
 
 export interface IIConButtonProps {

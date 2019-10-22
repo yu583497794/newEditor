@@ -1,0 +1,32 @@
+.check-list-item
+  display: flex
+  align-items: center
+  margin: .5em 0 .5em 2em
+  .check-list-item-btn
+    flex: 0 0 20px
+    margin-right: 1em
+    input
+      width: 20px
+      height: 20px
+      cursor: pointer
+      outline: none
+      appearance: none;
+      // background: url('./svg/round.svg')
+      // background-size: 20px
+      // &:checked
+      //   background-size: 20px
+      //   background: url('./svg/done.svg')
+      &::after
+        content: url('./svg/round.svg')
+      &:checked::after
+        content: url('./svg/done.svg')
+  .check-list-item-text
+    flex: 1
+    white-space: pre-line
+    word-break: break-all
+    transition: color 0.4s
+    &.checked
+      color: #d9d9d9
+      text-decoration: line-through
+
+
