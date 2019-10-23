@@ -7,6 +7,7 @@ import './index.styl'
 import { connect } from 'react-redux'
 import { IStoreState } from '../../../../../store'
 import { setValue } from '../../../../../store/actions'
+import { debounce } from 'lodash'
 
 export interface IEmojisButtonProps {
   // editor: React.RefObject<CoreEditor>;
@@ -35,13 +36,15 @@ const EmojisButton = ({value, setValue}: IEmojisButtonProps)  => {
     return setValue(controller.insertInline(newInline).moveToStartOfNextText().focus().value)
   }, [value, setValue])
 
+  const clickEmojiHandlerDebounced = React.useCallback(debounce(clickEmojiHandler, 50), [clickEmojiHandler])
+
   const hidePannel = React.useCallback((e) => {
     e.stopPropagation()
     setVisible(false)
     const controller = new CoreEditor({value})
     setValue(controller.focus().value)
   }, [value, setValue])
-  const EmojisPannel = useEmojisPannel(clickEmojiHandler, hidePannel)
+  const EmojisPannel = useEmojisPannel(clickEmojiHandlerDebounced, hidePannel)
   return (
     <span className='emoji-btn-wrapper'>
       <IconButton className='emoji-toolbar-btn' isActive={isVisible} clickHandler={togglePannel}>
