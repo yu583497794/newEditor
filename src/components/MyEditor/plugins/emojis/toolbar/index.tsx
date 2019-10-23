@@ -30,8 +30,12 @@ const EmojisButton = ({value, setValue}: IEmojisButtonProps)  => {
       data: {code},
       type: 'emoji'
     })
-    e.preventDefault()
-    e.stopPropagation()
+    // e.preventDefault()
+    // e.stopPropagation()
+    // 保留原始合成事件
+    // 如果在react中想异步访问事件属性（如在setTimeout内），应该在是处理事件时调用event.persist()，
+    // 这会从事件池中移除该合成函数并允许对该合成事件的引用被保留下来。
+    e.persist()
     const controller = new CoreEditor({value})
     return setValue(controller.insertInline(newInline).moveToStartOfNextText().focus().value)
   }, [value, setValue])
