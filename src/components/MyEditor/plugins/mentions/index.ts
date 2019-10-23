@@ -1,7 +1,7 @@
 import createOnChangeFn from './handlers/onChange'
 import onKeyDown from './handlers/onKeyDown'
 import schema from './schemas'
-import  renders from './renders'
+import  renders from './renderings'
 const defaultUsers: IMention[] = require('./users.json')
 export default {
   onChange: createOnChangeFn(defaultUsers),
