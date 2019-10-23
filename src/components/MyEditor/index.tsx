@@ -60,7 +60,7 @@ class MyEditor extends React.Component<IMyEditorProps> {
         <Toolbar/>
         <Editor
           value={this.props.value}   
-          placeholder={"请输入..."}
+          // placeholder={"请输入..."}
           plugins={plugins}
           // onChange={this.props.onChange}
           onChange={this.onChange}
