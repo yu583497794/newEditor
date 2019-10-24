@@ -12,7 +12,7 @@ import { debounce } from 'lodash'
 export interface IEmojisButtonProps {
   // editor: React.RefObject<CoreEditor>;
   value: Value;
-  setValue: (value: Value) => any;
+  setValue: (value: Value) => any
 }
 
 const EmojisButton = ({value, setValue}: IEmojisButtonProps)  => {

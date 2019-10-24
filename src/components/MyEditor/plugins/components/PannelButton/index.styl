@@ -1,0 +1,20 @@
+.pannel-icon-wrapper
+  &:hover
+    border: 1px solid #e7e7e7
+  .pannel-icon
+  .state-tip
+    position: relative
+    width: 10px
+    height: 24px
+    &::after
+      position: absolute
+      left: 50%
+      top: 50%
+      transform: translate(-50%, -50%)
+      border: 2px solid transparent
+      border-bottom-color: #a8a8a8
+      transition: transform .5s ease
+    &.down::after
+      transform: rotate(180deg)
+
+
