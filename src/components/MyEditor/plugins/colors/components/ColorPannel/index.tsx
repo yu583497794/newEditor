@@ -1,9 +1,8 @@
 import React from 'react'
 import './index.styl'
 const defaultColorList = [
-  '#FFC1C1', '#FFC125', '#FFC0CB', '#FFBBFF',
-  '#FFB90F', '#FFB6C1', '#FFB5C5', '#FFAEB9',
-  '#FFA54F', '#FFA500', '#FFA07A', '#FF8C69'
+  '#FFC1C1', '#9A32CD', '#00F57F', '#FFBBFF',
+  '#32B90F', '#00FF7F'
 ]
 export interface IColorPannelProps {
   setCurColor: (e: React.MouseEvent, color: string) => any;

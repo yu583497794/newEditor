@@ -1,5 +1,5 @@
 import React from 'react'
-import IconButton from '../../components/IconButton'
+import IconButton from '../../../components/IconButton'
 import { Editor, Value } from 'slate'
 import { connect } from 'react-redux'
 import { IStoreState } from '../../../../../store'

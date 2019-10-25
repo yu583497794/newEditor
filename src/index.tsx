@@ -7,9 +7,12 @@ import { Provider } from 'react-redux'
 import store from './store'
 import 'common/stylus/index.styl'
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <div className='app-wrapper'>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </div>
+  ,
   document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

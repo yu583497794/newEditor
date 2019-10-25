@@ -1,0 +1,29 @@
+@import '~common/stylus/variable'
+.dropbox-wrapper
+    visibility: visible
+    transition: all .3s easy
+  &.dropbox-wrapper-invisible
+    visibility: hidden
+  .dropbox-mask
+    position: fixed
+    top: 0
+    bottom: 0
+    left: 0
+    right: 0
+  .dropbox-content
+    position: absolute
+    z-index: 1
+    top: calc(100% + 8px)
+    left: 25%
+    box-shadow: 0 0 2px 3px rgba(0, 0, 0, 0.3)
+    // outline: 1px solid rgba(0, 0, 0, .3)
+    background: #ffffff
+  .dropbox-triangle
+    position: absolute
+    top: calc(100% + 8px)
+    left: 50%
+    z-index: 1
+    transform: translate(-50%, -100%)
+    border: 5px solid transparent
+    border-bottom-color: white
+

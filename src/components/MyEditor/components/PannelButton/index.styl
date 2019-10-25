@@ -1,0 +1,23 @@
+.pannel-icon-wrapper
+  display: inline-grid
+  grid-template-columns: 16px 12px
+  height: 16px
+  font-size: 0
+  &:hover
+    outline: 1px solid #e7e7e7
+  .state-tip
+    display: flex
+    align-items: center
+    &::before
+      height: 20px
+      width: 0
+      border: 1px solid black
+    .pannel-icon-triangle
+      border: 2.5px solid transparent
+      border-bottom-color: blue
+      transform-origin: 50% 50%
+      transition: transform .3s ease
+    &.down .pannel-icon-triangle
+      transform: rotate(180deg)
+
+

@@ -10,10 +10,12 @@ const PannelButton: React.FC<IPannelBtnProps> = (props) => {
   }, [props])
   return (
     <div className='pannel-icon-wrapper'>
-      <div className='pannel-icon'>
+      <span className='pannel-icon'>
         {props.children}
-      </div>
-      <span className={`state-tip ${props.isVisible ? '' : 'down'}`} onClick={toggleVisible}/>
+      </span>
+      <span className={`state-tip ${props.isVisible ? '' : 'down'}`} onClick={toggleVisible}>
+        <span className='pannel-icon-triangle'/>
+      </span>
     </div>
   ) 
 }
