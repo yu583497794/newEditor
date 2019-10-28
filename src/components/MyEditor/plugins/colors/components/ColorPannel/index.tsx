@@ -5,19 +5,23 @@ const defaultColorList = [
   '#32B90F', '#00FF7F'
 ]
 export interface IColorPannelProps {
-  setCurColor: (e: React.MouseEvent, color: string) => any;
+  setCurColor: (color: string) => any;
   curColor: string;
   colorList?: string[];
 }
 
 const ColorPannel: React.FC<IColorPannelProps> = (props) => {
   const colorList = React.useMemo(() => props.colorList || defaultColorList, [props.colorList])
+  const clickHandler = React.useCallback((e, color) => {
+    e.preventDefault()
+    props.setCurColor(color)
+  }, [props])
   return (
     <ul className='color-list'>
       {
         colorList.map(color => {
           return (
-            <li className={`color-item ${color === props.curColor ? 'cur-color-item' : ''}`} key={color} onClick={(e) => {props.setCurColor(e, color)}}>
+            <li className={`color-item ${color === props.curColor ? 'cur-color-item' : ''}`} key={color} onClick={(e) => {clickHandler(e, color)}}>
               <span className='color-item-content' style={{background: color}}></span>
             </li>
           )

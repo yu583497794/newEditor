@@ -7,11 +7,11 @@ export interface IDropBoxProps {
   setVisible: (visible: boolean) => any;
   marginTop?: string;
   wrapper?: string;
+  hidePannel: (e: React.MouseEvent<HTMLDivElement>) => any
 }
 const IconPannel: React.FC<IDropBoxProps> = function (props) {
   const dropbox = React.useRef(null)
   React.useEffect(() => {
-    console.log(dropbox)
     if (dropbox.current === null) return
     let wrapper
     try {
@@ -32,9 +32,16 @@ const IconPannel: React.FC<IDropBoxProps> = function (props) {
     dropbox.current.style.transform = `translate(${toRight || toLeft}px, 0)`
   }, [props.wrapper])
 
+  // const hidePannel = React.useCallback((e) => {
+  //   e.preventDefault()
+  //   e.stopPropagation()
+  //   props.setVisible(false)
+  //   // 会失去焦点
+  // }, [props])
+
   return (
     <div className={`dropbox-wrapper ${props.visible ? '' : 'dropbox-wrapper-invisible'}`}>
-      <div className='dropbox-mask' onClick={() => {props.setVisible(false)}}/>
+      <div className='dropbox-mask' onClick={props.hidePannel}/>
       <div className='dropbox-content' ref={dropbox}>
         {props.children}
       </div>

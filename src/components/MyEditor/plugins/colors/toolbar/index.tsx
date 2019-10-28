@@ -3,7 +3,7 @@ import DropBox from '../../../components/DropBox'
 import PannelButton from '../../../components/PannelButton'
 import IconButton from '../../../components/IconButton'
 import ColorPannel from '../components/ColorPannel'
-import { Value, Editor } from 'slate'
+import { Value, Editor, Mark } from 'slate'
 import { setValue } from '../../../../../store/actions'
 import { IStoreState } from '../../../../../store/index'
 import { connect } from 'react-redux'
@@ -14,40 +14,82 @@ export type IColorBtnProps = ReturnType<typeof mapStateToProps> & ReturnType<typ
 const ColorButton: React.FC<IColorBtnProps> = props => {
   const [ isVisible, setVisible ] =  React.useState(false)
   const [ curColor, setCurColor ] = React.useState('#000')
-
-  const setTextCurColor = React.useCallback((e) => {
+  const setTextColor = React.useCallback((color) => {
+    const { value, setValue } = props
+    const { selection, document } = value
+    const { start, end } = selection
     const controller = new Editor({
-      value: props.value
+      value
     })
-    const newValue = controller.toggleMark({
-      type: 'color',
-      data: { 
-        color: curColor
-      }
-    }).value
-    return props.setValue(newValue)
-  }, [props, curColor])
-
-  const setTextNewColor = React.useCallback((color) => {
-    const controller = new Editor({
-      value: props.value
-    })
-    const newValue = controller.toggleMark({
+    const mark = Mark.create({
       type: 'color',
       data: {
         color
       }
-    }).value
-    return props.setValue(newValue)
-  }, [props])
+    })
+    // recode addMark
+    if (selection.isExpanded) {
+      controller.withoutNormalizing(() => {
+        const texts = document.getTextsAtRange(selection)
+        texts.forEach(node => {
+          // @ts-ignore
+          const { key } = node
+          let index = 0
+          let length = (node && node.text.length) || 0
 
-  const clickHandler = React.useCallback((e, color) => {
+          if (key === start.key) index = start.offset
+          if (key === end.key) length = end.offset
+          if (key === start.key && key === end.key)
+            length = end.offset - start.offset
+          
+          // @ts-ignore
+          const colorMarks = node.marks.filter(mark => mark.type === 'color')
+          colorMarks.forEach(colorMark => {
+            // @ts-ignore
+            controller.removeMarkByKey(key, index, length, colorMark)
+          })
+        })
+        controller.addMarkAtRange(selection, mark)
+      }) 
+    } else if (selection.marks) {
+      // @ts-ignore
+      const marks = selection.marks.filter(mark => mark.type !== 'color').add(mark)
+      const sel = selection.set('marks', marks)
+      // @ts-ignore
+      controller.select(sel).focus()
+    } else {
+      // @ts-ignore
+      const marks = document.getActiveMarksAtRange(selection).filter(mark => mark.type !== 'color').add(mark)
+      const sel = selection.set('marks', marks)
+      // @ts-ignore
+      controller.select(sel).focus()
+    }
+    setValue(controller.value)
+  }, [props])
+  const setTextCurColor = React.useCallback((e) => {
+    e.preventDefault()
+    // const controller = new Editor({
+    //   value: props.value
+    // })
+    // props.setValue(controller.focus().value)
+    setTextColor(curColor)
+  }, [setTextColor, curColor]) 
+
+  const clickHandler = React.useCallback((color) => {
     if (color !== curColor) {
       setCurColor(color)
     }
-    setTextNewColor(color)
-    
-  }, [curColor, setTextNewColor])
+    setTextColor(color)
+  }, [curColor, setTextColor])
+
+  const hidePannel = React.useCallback((e) => {
+    e.stopPropagation()
+    setVisible(false)
+    const newValue = new Editor({
+      value: props.value
+    }).focus().value
+    props.setValue(newValue)
+  }, [props])
   return (
     <div className='colors-btn-wrapper'>
       <PannelButton setVisible={setVisible} isVisible={isVisible}>
@@ -55,7 +97,7 @@ const ColorButton: React.FC<IColorBtnProps> = props => {
           <i className='iconfont' style={{color: curColor}}>&#xecda;</i>
         </IconButton>
       </PannelButton>
-      <DropBox visible={isVisible} setVisible={setVisible} wrapper={'#editor-wrapper'}>
+      <DropBox visible={isVisible} setVisible={setVisible} wrapper={'#editor-wrapper'} hidePannel={hidePannel}>
         <ColorPannel setCurColor={clickHandler} curColor={curColor} />
       </DropBox>
     </div>
