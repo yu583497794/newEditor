@@ -2,7 +2,7 @@ import React from 'react'
 import DropBox from '../../../components/DropBox'
 import PannelButton from '../../../components/PannelButton'
 import IconButton from '../../../components/IconButton'
-import ColorPannel from '../components/ColorPannel'
+import ColorsPannel from '../components/ColorPannel'
 import { Value, Editor, Mark } from 'slate'
 import { setValue } from '../../../../../store/actions'
 import { IStoreState } from '../../../../../store/index'
@@ -68,10 +68,6 @@ const ColorButton: React.FC<IColorBtnProps> = props => {
   }, [props])
   const setTextCurColor = React.useCallback((e) => {
     e.preventDefault()
-    // const controller = new Editor({
-    //   value: props.value
-    // })
-    // props.setValue(controller.focus().value)
     setTextColor(curColor)
   }, [setTextColor, curColor]) 
 
@@ -79,6 +75,7 @@ const ColorButton: React.FC<IColorBtnProps> = props => {
     if (color !== curColor) {
       setCurColor(color)
     }
+    setVisible(false)
     setTextColor(color)
   }, [curColor, setTextColor])
 
@@ -98,7 +95,7 @@ const ColorButton: React.FC<IColorBtnProps> = props => {
         </IconButton>
       </PannelButton>
       <DropBox visible={isVisible} setVisible={setVisible} wrapper={'#editor-wrapper'} hidePannel={hidePannel}>
-        <ColorPannel setCurColor={clickHandler} curColor={curColor} />
+        <ColorsPannel setCurColor={clickHandler} curColor={curColor} />
       </DropBox>
     </div>
   )

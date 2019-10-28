@@ -14,6 +14,7 @@ const ColorPannel: React.FC<IColorPannelProps> = (props) => {
   const colorList = React.useMemo(() => props.colorList || defaultColorList, [props.colorList])
   const clickHandler = React.useCallback((e, color) => {
     e.preventDefault()
+    e.stopPropagation()
     props.setCurColor(color)
   }, [props])
   return (

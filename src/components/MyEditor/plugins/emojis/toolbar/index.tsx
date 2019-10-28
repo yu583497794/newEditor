@@ -1,30 +1,21 @@
 import React from 'react'
-import useEmojisPannel from './useEmojisPannel'
-// import EmojisPannel from './emojisPannel'
-import { Inline, Editor as CoreEditor, Value } from 'slate'
+import DropBox from '../../../components/DropBox'
+import PannelButton from '../../../components/PannelButton'
 import IconButton from '../../../components/IconButton'
-import './index.styl'
-import { connect } from 'react-redux'
-import { IStoreState } from '../../../../../store'
+import EmojisPannel from './emojisPannel'
+import { Inline, Editor as CoreEditor, Value } from 'slate'
 import { setValue } from '../../../../../store/actions'
+import { IStoreState } from '../../../../../store/index'
+import { connect } from 'react-redux'
 import { debounce } from 'lodash'
+import './index.styl'
 
-export interface IEmojisButtonProps {
-  // editor: React.RefObject<CoreEditor>;
-  value: Value;
-  setValue: (value: Value) => any
-}
-
-const EmojisButton = ({value, setValue}: IEmojisButtonProps)  => {
+export type IEmojiBtnProps = ReturnType<typeof mapStateToProps> & ReturnType<typeof mapDispatchToProps>
+const EmojiButton: React.FC<IEmojiBtnProps> = ({value, setValue}: IEmojiBtnProps) => {
   const [isVisible, setVisible] = React.useState(false)
-  const togglePannel = React.useCallback((e) => {
-    e.preventDefault()
-    e.stopPropagation()
-    setVisible(visible => !visible)
-    const controller = new CoreEditor({value})
-    setValue(controller.focus().value)
-  }, [value, setValue])
-
+  const hidePannel = React.useCallback(() => {
+    setVisible(false)
+  }, [])
   const clickEmojiHandler = React.useCallback((e, code) => {
     const newInline = Inline.create({
       data: {code},
@@ -41,38 +32,28 @@ const EmojisButton = ({value, setValue}: IEmojisButtonProps)  => {
   }, [value, setValue])
 
   const clickEmojiHandlerDebounced = React.useCallback(debounce(clickEmojiHandler, 50), [clickEmojiHandler])
-
-  const hidePannel = React.useCallback((e) => {
-    e.stopPropagation()
-    setVisible(false)
-    const controller = new CoreEditor({value})
-    setValue(controller.focus().value)
-  }, [value, setValue])
-  const EmojisPannel = useEmojisPannel(clickEmojiHandlerDebounced, hidePannel)
   return (
-    <span className='emoji-btn-wrapper'>
-      <IconButton className='emoji-toolbar-btn' isActive={isVisible} clickHandler={togglePannel}>
-        <span><i className='iconfont'>&#xe783;</i></span>
-      </IconButton>
-      <div className={`emojis-pannel-wrapper ${isVisible ? 'emojis-pannel-wrapper-visible' : ''}`}>
-        {/* <EmojisPannel clickEmojiHandler={clickEmojiHandler} hidePannel={hidePannel}/> */}
-        {EmojisPannel}
-      </div>
-    </span>
+    <div className='color-btn-wrapper'>
+      <PannelButton setVisible={setVisible} isVisible={isVisible}>
+        <IconButton isActive={isVisible} clickHandler={() => {setVisible((v) => !v)}}>
+          <i className='iconfont'>&#xe783;</i>
+        </IconButton>
+      </PannelButton>
+      <DropBox visible={isVisible} setVisible={setVisible} wrapper={'#editor-wrapper'} hidePannel={hidePannel}>
+        <EmojisPannel clickEmojiHandler={clickEmojiHandlerDebounced}/>
+      </DropBox>
+    </div>
   )
 }
 
-const mapStateToProps = (state: IStoreState) => {
+const mapStateToProps = (state:IStoreState) => {
   return {
     value: state.value
   }
 }
-
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    setValue (value: Value) {
-      dispatch(setValue(value))
-    }
+    setValue: (value: Value) => dispatch(setValue(value))
   }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(EmojisButton)
+export default connect(mapStateToProps, mapDispatchToProps)(EmojiButton)

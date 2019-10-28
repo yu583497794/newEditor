@@ -1,20 +1,8 @@
 @import '~common/stylus/variable.styl'
-.emojis-pannel-wrapper
-  position: absolute
-  top: calc(100% + 2px)
-  left: 0
-  z-index: 1
 .emojis-pannel
   padding: 10px
-  background: $color-dialog-background
+  display: grid
+  grid-template-columns: repeat(5, 1fr)
   z-index: 1
   .emojis-pannel-item
-    grid-template-columns: repeat(6, 1fr)
     cursor: pointer
-.emojis-pannel-mask
-  position: fixed
-  top: 0
-  bottom: 0
-  left: 0
-  right: 0
-  z-index: -1

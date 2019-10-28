@@ -18,14 +18,12 @@ function useEmojisPannel (clickEmojiHandler: (e: React.MouseEvent, emoji: string
   // }, [emojis, clickEmojiHandler, hidePannel])
   const EmojisPannel = React.useMemo(() => {
     return (
-      <React.Fragment>
-        <div className='emojis-pannel-mask' onClick={hidePannel}/>
-        <div className='emojis-pannel'>
-          {emojis.map((emoji, index) => (
-            <span className='emojis-pannel-item' key={index} onClick={e => clickEmojiHandler(e, emoji)}>{emoji}</span>
-          ))}
-        </div>
-      </React.Fragment>)
+      <div className='emojis-pannel'>
+        {emojis.map((emoji, index) => (
+          <span className='emojis-pannel-item' key={index} onClick={e => clickEmojiHandler(e, emoji)}>{emoji}</span>
+        ))}
+      </div>
+    )
   }, [emojis, clickEmojiHandler, hidePannel])
   return EmojisPannel
 }
