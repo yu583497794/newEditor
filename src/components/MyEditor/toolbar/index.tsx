@@ -4,7 +4,8 @@ import MarkButton from '../plugins/mark/toolbar'
 import EmojisContext from '../plugins/emojis/toolbar/emojisContext'
 import CheckListButton from '../plugins/checkLists/toolbar'
 import ColorButton from '../plugins/colors/toolbar'
-import EmojiButtton from '../plugins/emojis/toolbar'
+import EmojiButton from '../plugins/emojis/toolbar'
+import LinkButton from '../plugins/link/toolbar'
 import './toolbar.styl'
  
 let marks = ['bold', 'italic', 'underline']
@@ -18,8 +19,9 @@ function Toolbar () {
       <CheckListButton/>
       <ColorButton/>
       <EmojisContext.Provider value={emojis}>
-        <EmojiButtton />
+        <EmojiButton />
       </EmojisContext.Provider>
+      <LinkButton/>
     </div>
   )
 }

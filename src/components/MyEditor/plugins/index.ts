@@ -5,6 +5,7 @@ import mentions from './mentions'
 import checkLists from './checkLists'
 import placeholder from './placeholder'
 import colors from './colors'
+import link from './link'
 export default [
   autoClose,
   mark,
@@ -12,5 +13,6 @@ export default [
   mentions,
   checkLists,
   placeholder,
-  colors
+  colors,
+  link,
 ]
