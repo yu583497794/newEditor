@@ -12,7 +12,7 @@ export type ILinkBtnProps = ReturnType<typeof mapStateToProps> & ReturnType<type
 const LinkButton = (props: ILinkBtnProps) => {
   const [isVisible, setVisible] = React.useState(false)
   const insertLink = React.useCallback((editor: Editor, href: string, text: string) => {
-    return editor.insertText(' ').insertInlineAtRange(editor.value.selection, {
+    return editor.insertInlineAtRange(editor.value.selection, {
       type: 'link',
       data: {
         href,

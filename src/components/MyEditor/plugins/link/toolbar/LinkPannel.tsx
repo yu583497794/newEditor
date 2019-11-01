@@ -1,5 +1,5 @@
 import React from 'react'
-
+import './linkPannel.styl'
 export interface ILinkPannelProps {
   clickHandler: (text: string, href: string) => any;
   onlyUrl: boolean;
@@ -14,25 +14,38 @@ const LinkPannel = (props: ILinkPannelProps) => {
       if (text.current) {
         // @ts-ignore
         props.clickHandler(url.current.value, text.current.value || '链接')
+        // @ts-ignore
+        text.current.value = ''
+        // @ts-ignore
       } else {
         // @ts-ignore
         props.clickHandler(url.current.value)
       }
+      // @ts-ignore
+      url.current.value = ''
     }
   }, [props])
   return (
     <div className='link-pannel-wrapper'>
-      {
-        !props.onlyUrl && (<label>
-          <span>请输入链接的名称</span>
-          <input type="text" ref={text}/>
-        </label>)
-      }
-      <label>
-        <span>请输入链接的url</span>
-        <input type="text"  ref={url}/>
-      </label>
-      <button type='submit' onClick={clickHandler}>提交</button>
+      <section className='link-form'>
+        {
+          !props.onlyUrl && (<label className='link-label'>
+            <span className='link-text'>链接名称</span>
+            <span className='link-input'>
+              <input type="text" ref={text}/>
+            </span>
+          </label>)
+        }
+        <label className='link-label'>
+          <span className='link-text'>链接url</span>
+          <span className='link-input'>
+            <input type="url"  required ref={url} className='link-input-url'/>
+          </span>
+        </label>
+      </section>
+      <section className='link-submit'>
+        <button type='submit' onClick={clickHandler}>提交</button>
+      </section>
     </div>
   )
 }

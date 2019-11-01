@@ -1,13 +1,15 @@
 @import '~common/stylus/variable.styl'
 .toolbar-icon
-  position relative
-  display inline-block
-  vertical-align: top
+  position: relative
+  display: inline-flex
   padding: 0 2px
   height: 20px
+  align-items: center
   color: pink
   cursor: pointer
   &:hover
-    background: $color-icon-hover 
+    background: $color-icon-hover
+  & > i
+    vertical-align: middle
 .active-toolbar-icon
   color: purple

@@ -1,7 +1,10 @@
 export default {
   inlines: {
     link: {
-      // isVoid: true
+      isVoid: true,
+      nodes: [{
+        match: { object: 'text' }
+      }]
     }
   }
 }

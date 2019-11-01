@@ -12,9 +12,3 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
-.app-wrapper {
-  width: 200px;
-  margin: 0 auto;
-  background: white;
-}

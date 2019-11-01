@@ -1,0 +1,39 @@
+@import '~common/stylus/variable' 
+.link-pannel-wrapper
+  padding: 10px
+  width: 250px
+  box-sizing: border-box
+  display: flex
+  .link-form
+    flex: 1
+    display: flex
+    flex-direction: column
+    margin-right: 10px
+    .link-label
+      display: flex
+      & + .link-label
+        margin-top: 5px
+      .link-text
+        flex: 0 0  80px
+        color: #888888
+      .link-input
+        flex: 1
+        padding-right: 1px
+        input
+          width: 100%
+          border: 1px solid #bdbcde
+          .link-input-url
+            &:invalid
+              outline: 1px solid red
+  .link-submit
+    flex: 0 0 40px
+    display: flex
+    align-items: center
+    button
+      padding: 5px
+      background: $color-theme 
+      border: none
+      color: white
+      &:active
+        transform: translate3d(0, 0, -1)
+

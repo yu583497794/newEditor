@@ -11,7 +11,7 @@ import Suggestions from './plugins/mentions/components/SuggestionList'
 // import { getInput } from './plugins/mentions/utils'
 // import { USER_MENTION_NODE_TYPE, IMention } from './plugins/mentions'
 import { IMention } from './plugins/mentions'
-
+import './index.styl'
 export interface IMyEditorProps extends EditorState {
   // onChange: OnChangeFn; 
   setValue: (value: Value) => any
@@ -56,19 +56,23 @@ class MyEditor extends React.Component<IMyEditorProps> {
   }
   render () {
     return (
-      <div id='editor-wrapper'>
-        <Toolbar/>
-        <Editor
-          value={this.props.value}   
-          // placeholder={"请输入..."}
-          plugins={plugins}
-          // onChange={this.props.onChange}
-          onChange={this.onChange}
-        />
-        <Suggestions
-          // onSelect={(user) => {this.insertMention(user)}}
-          anchor={'.mention-context'}
-        />
+      <div className='my-editor-wrapper'>
+        <div className='toolbar-wrapper'>
+          <Toolbar/>
+        </div>
+        <div className='editor-wrapper'>
+          <Editor
+            value={this.props.value}   
+            // placeholder={"请输入..."}
+            plugins={plugins}
+            // onChange={this.props.onChange}
+            onChange={this.onChange}
+          />
+          <Suggestions
+            // onSelect={(user) => {this.insertMention(user)}}
+            anchor={'.mention-context'}
+          />
+        </div>
       </div>
     ) 
   }
