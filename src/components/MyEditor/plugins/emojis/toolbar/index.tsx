@@ -27,6 +27,7 @@ const EmojiButton: React.FC<IEmojiBtnProps> = ({value, setValue}: IEmojiBtnProps
     // 如果在react中想异步访问事件属性（如在setTimeout内），应该在是处理事件时调用event.persist()，
     // 这会从事件池中移除该合成函数并允许对该合成事件的引用被保留下来。
     e.persist()
+    setVisible(false)
     const controller = new CoreEditor({value})
     return setValue(controller.insertInline(newInline).moveToStartOfNextText().focus().value)
   }, [value, setValue])

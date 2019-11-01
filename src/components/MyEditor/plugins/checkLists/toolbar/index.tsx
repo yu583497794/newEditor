@@ -14,7 +14,7 @@ const CheckListButton: React.FunctionComponent<ICheckListProps> = (props) => {
     const type = props.value.startBlock.type === 'check-list' ? 'paragraph' : 'check-list'
     const controller = new Editor({value: props.value})
     props.setValue(
-      controller.setBlocks(type).value
+      controller.setBlocks(type).focus().value
     )
 
   }, [props])
